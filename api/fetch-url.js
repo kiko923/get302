@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const { url } = req.query;
 
   if (!url) {
-    return res.status(400).send('请提供一个url参数');
+    return res.status(400).json({ code: 400, msg: '请提供一个url参数' });
   }
 
   try {
@@ -21,8 +21,8 @@ export default async function handler(req, res) {
 
     const finalUrl = response.url;
 
-    return res.status(200).send(finalUrl);
+    return res.status(200).json({ code: 200, msg: '成功', url: finalUrl });
   } catch (error) {
-    return res.status(500).send('发生错误: ' + error.message);
+    return res.status(500).json({ code: 500, msg: '发生错误: ' + error.message });
   }
 }
